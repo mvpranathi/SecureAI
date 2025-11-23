@@ -1,22 +1,31 @@
-# STRIDE Threat Model – MNIST Classifier
+# Threat Model – STRIDE Framework
 
-| STRIDE Category | Threat Example | Risk Level | Possible Mitigation |
-|-----------------|----------------|------------|----------------------|
-| **S – Spoofing** | Fake input pretending to be another user/class | Medium | Input validation, authentication |
-| **T – Tampering** | Data poisoning (changing labels or pixels) | 🔥 HIGH | Data integrity check, hashing |
-| **R – Repudiation** | No logs of who trained the model | Low | Logging + audit trails |
-| **I – Information Disclosure** | Model leak exposes patterns | Medium | Secure model storage |
-| **D – Denial of Service** | Large batch crashes training | Medium | Rate limiting, batch size restriction |
-| **E – Elevation of Privilege** | Bypass model security layers | 🔥 HIGH | Role-based access control |
+## 1. Spoofing (S)
+- Attack: Fake or poisoned MNIST digits.
+- Defense: Input validation + dataset checksum verification.
+
+## 2. Tampering (T)
+- Attack: Modify labels or pixel values to corrupt training.
+- Defense: Hash validation + adversarial detection.
+
+## 3. Repudiation (R)
+- Attack: No logging → attacker denies involvement.
+- Defense: Enable logs + audit trails.
+
+## 4. Information Disclosure (I)
+- Attack: Model inversion or leaking training data.
+- Defense: Use differential privacy in training.
+
+## 5. Denial of Service (D)
+- Attack: Too many model inference requests.
+- Defense: Rate limiting / authentication.
+
+## 6. Elevation of Privilege (E)
+- Attack: Modify code or change model parameters.
+- Defense: RBAC + API key security.
 
 ---
 
-### 🧠 Final Observation
-The MNIST classifier is **vulnerable to data poisoning attacks**,  
-but **defense training improves robustness** significantly.
-
-To make the system secure in production:
-- Use **adversarial training regularly**
-- Enable **data validation**
-- Keep **secure logging + versioning**
-- Deploy model via **API with authentication**
+## Summary  
+This CNN is vulnerable to data poisoning & spoofing.  
+STRIDE analysis helps implement defenses like validation, logging, and secure training.
